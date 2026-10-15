@@ -80,7 +80,7 @@ export const profile = {
     { src: "/images/poses/Justine Pose 4.png", alt: "Justine posing" },
   ],
 
-  bio: "Justine is a multimedia creator based in Manila, Philippines, who loves blending art and technology, from building digital products to designing interfaces and crafting engaging user experiences. Her work brings together development, UI/UX design, and visual storytelling, guided by a sharp eye for detail and a user-centered approach. Outside of web and digital design, she's into film and photography, capturing and editing visual stories that add another layer to her work.",
+  bio: "Justine is a Software Developer and a multimedia creator based in Manila, Philippines. She thrives at the intersection of logic and art, building software and designing user experiences that are intuitive, engaging, and impactful. She translates complex technical needs into elegant, interactive designs. Driven by an endless curiosity, Justine loves learning anything she can get her hands on, from new technologies to artistic mediums. This dual perspective is why she is equal parts engineer and creator, deeply enriching her technical work with a passion for film and photography.",
 };
 
 // Buttons under the bio. "href" starting with "/" stays on the site;
