@@ -43,8 +43,8 @@ export const viewport = {
 };
 
 // Runs before the page paints so there's no flash of the wrong theme.
-// Uses the visitor's saved choice, or their device setting on first visit.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`;
+// First visit is always light mode; after that, the visitor's own choice is remembered.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t='light';}document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`;
 
 export default function RootLayout({ children }) {
   return (
