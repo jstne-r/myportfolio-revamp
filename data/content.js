@@ -32,12 +32,19 @@ export const navbar = {
   // Messages under the clock, picked by the hour in your time zone.
   // "from" and "to" are hours on a 24-hour clock (0 = midnight, 18 = 6 PM).
   // "icon" can be "sun" or "moon".
-  statuses: [
-    { from: 0, to: 6, icon: "moon", text: "Probably asleep (hopefully)" },
-    { from: 6, to: 9, icon: "sun", text: "Coffee first, pixels later" },
-    { from: 9, to: 18, icon: "sun", text: "Probably designing something" },
-    { from: 18, to: 22, icon: "moon", text: "Probably sketching or editing" },
-    { from: 22, to: 24, icon: "moon", text: "Still up, playing guitar" },
+   statuses: [
+    { from: 0, to: 7, icon: "moon", text: "Probably asleep (hopefully)" },
+    { from: 7, to: 8, icon: "sun", text: "Looking for coffee (she needs it...)" },
+    { from: 8, to: 9, icon: "sun", text: "Eating breakfast (I think)" },
+    { from: 9, to: 12, icon: "sun", text: "Learning and working on stuff" },
+    { from: 12, to: 13, icon: "sun", text: "Eating somewhere (again)" },
+    { from: 13, to: 15, icon: "sun", text: "Curiosity hits her again" },
+    { from: 15, to: 17, icon: "sun", text: "Doing final touches on work" },
+    { from: 17, to: 19, icon: "sun", text: "Lifting heavy stuff or probably running" },
+    { from: 19, to: 20, icon: "moon", text: "Don't forget to eat dinner!" },
+    { from: 20, to: 21, icon: "moon", text: "Playing around on instruments" },
+    { from: 21, to: 23, icon: "moon", text: "One more chapter, then bed" },
+    { from: 23, to: 24, icon: "moon", text: "Laying in bed, scrolling" },
   ],
 
   // Caption next to the light/dark button.
