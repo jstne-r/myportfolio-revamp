@@ -1,0 +1,1058 @@
+/* =====================================================================
+   app/globals.css
+   All styles for the site. Colors are defined once at the top as
+   variables, so changing a color here updates it everywhere, in both
+   light and dark mode.
+   ===================================================================== */
+
+/* ---------- Colors: light mode ---------- */
+:root {
+  --bg: #f5f5f5;           /* page background */
+  --fg: #26262a;           /* main text */
+  --muted: #5d5c60;        /* secondary text */
+  --card: #ffffff;         /* cards */
+  --line: #dcdcdc;         /* borders and dividers */
+  --accent: #0047ab;       /* links, highlights (cobalt blue) */
+  --accent-soft: #dfe7f4;  /* chips, soft backgrounds */
+  --button: #0047ab;       /* filled buttons */
+  --button-hover: #00357f; /* filled buttons on hover */
+  --button-text: #ffffff;
+
+  --radius: 12px;
+  --content-width: 600px;
+  --font: var(--font-rounded), "Hiragino Maru Gothic ProN", "Arial Rounded MT Bold", system-ui, sans-serif;
+
+  color-scheme: light;
+}
+
+/* ---------- Colors: dark mode ---------- */
+:root[data-theme="dark"] {
+  --bg: #2a2a2d;
+  --fg: #f1efe8;
+  --muted: #b3b2ad;
+  --card: #36363a;
+  --line: #48484c;
+  --accent: #ffce1b;       /* yellow in dark mode */
+  --accent-soft: #3d3412;
+  --button: #ffce1b;
+  --button-hover: #ffdc5c;
+  --button-text: #231c00;  /* dark text on yellow for readability */
+
+  color-scheme: dark;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+  background: var(--bg);
+  color: var(--fg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--button);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  padding: 8px 14px;
+  background: var(--button);
+  color: var(--button-text);
+  border-radius: 8px;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+/* ---------- Page layout ---------- */
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 32px 20px 24px;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+.section h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+/* Page-load reveal: each block fades up, one after another.
+   Use style={{ "--d": 2 }} on an element to set its order. */
+.reveal {
+  animation: reveal 0.6s ease both;
+  animation-delay: calc(var(--d, 0) * 90ms);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.navbar-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-clock {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 10px;
+  margin: -4px -10px;
+  border-radius: 10px;
+  color: var(--fg);
+  transition: background-color 0.2s ease;
+  min-width: 0;
+}
+
+.nav-clock:hover {
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
+/* On the homepage the clock is display-only: no hover effect */
+.nav-clock.is-static:hover {
+  background: none;
+}
+
+.nav-clock-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.nav-clock-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.nav-clock-home {
+  display: none;
+  color: var(--accent);
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-clock:not(.is-static):hover .nav-clock-status,
+.nav-clock:not(.is-static):focus-visible .nav-clock-status {
+  display: none;
+}
+
+.nav-clock:not(.is-static):hover .nav-clock-home,
+.nav-clock:not(.is-static):focus-visible .nav-clock-home {
+  display: inline-flex;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-caption {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: right;
+  animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.theme-button {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: var(--button);
+  color: var(--button-text);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.theme-button:hover {
+  transform: rotate(-20deg);
+}
+
+@media (max-width: 520px) {
+  .theme-caption {
+    display: none;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.greeting-line {
+  font-size: 16px;
+  color: var(--muted);
+  cursor: default;
+  display: inline-flex;
+  align-items: baseline; /* the hand rests on the same line as the letters */
+  gap: 6px;
+  user-select: none;
+}
+
+.wave {
+  display: inline-flex;
+  color: var(--button);
+  transform-origin: 70% 85%;
+}
+
+.wave .icon {
+  position: relative;
+  top: 0.06em; /* small nudge so the base of the hand sits right on the line */
+}
+
+.wave.is-waving {
+  animation: wave 1.6s ease-in-out;
+}
+
+@keyframes wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  10%,
+  30%,
+  50% {
+    transform: rotate(18deg);
+  }
+  20%,
+  40% {
+    transform: rotate(-10deg);
+  }
+}
+
+.hero-name {
+  font-size: clamp(26px, 6vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-top: 2px;
+  min-height: 1.2em;
+}
+
+.caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.9em;
+  margin-left: 3px;
+  vertical-align: -0.08em;
+  background: var(--button);
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hero-roles {
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.hero-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0;
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hero-details li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.hero-details li:not(:last-child)::after {
+  content: "·";
+  margin: 0 8px;
+}
+
+.bio {
+  margin-top: 28px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1.5px solid var(--button);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.pill:hover {
+  text-decoration: none;
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+/* Filled button (e.g. "My works"): darker on hover, plus a small arrow */
+.pill-primary {
+  background: var(--button);
+  color: var(--button-text);
+}
+
+.pill-primary:hover {
+  background: var(--button-hover);
+  border-color: var(--button-hover);
+  color: var(--button-text);
+}
+
+.pill-arrow {
+  width: 0;
+  margin-left: -7px;
+  opacity: 0;
+  transition: width 0.2s ease, margin 0.2s ease, opacity 0.2s ease;
+}
+
+.pill-primary:hover .pill-arrow,
+.pill-primary:focus-visible .pill-arrow {
+  width: 15px;
+  margin-left: 0;
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-details {
+    justify-content: center;
+  }
+}
+
+/* ---------- Profile photo (shared) ---------- */
+.profile-photo {
+  position: relative;
+  width: 112px;
+  height: 112px;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Effect: cycle */
+.profile-photo.cycle {
+  border: 3px solid var(--button);
+  overflow: hidden;
+  background: var(--accent-soft);
+}
+
+.profile-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.profile-layer.is-visible {
+  opacity: 1;
+}
+
+/* Effect: fan out */
+.profile-main {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--button);
+  background: var(--accent-soft);
+}
+
+.fan-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border: 4px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  transition-delay: var(--delay, 0ms);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.profile-photo.fanout.is-open .fan-card {
+  opacity: 1;
+  z-index: 3;
+  transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) rotate(var(--r));
+}
+
+/* ---------- Cards ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--fg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.work-card:hover {
+  text-decoration: none;
+  transform: translateY(-3px);
+  border-color: var(--button);
+}
+
+.work-card-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 5;
+  object-fit: cover;
+  background: var(--accent-soft);
+}
+
+.work-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px 14px;
+}
+
+.work-card-title {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.work-card-summary {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ---------- Featured works carousel ---------- */
+/* Layout: [left arrow] [cards] [right arrow], arrows never overlap cards */
+.carousel-viewport {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carousel-track {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 0 6px; /* room for the card hover lift */
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-item {
+  flex: 0 0 calc(50% - 6px); /* 2 cards at a time */
+  scroll-snap-align: start;
+  display: flex;
+}
+
+.carousel-item .work-card {
+  width: 100%;
+}
+
+/* Slightly smaller cards inside the carousel */
+.carousel .work-card-image {
+  aspect-ratio: 16 / 9;
+}
+
+.carousel .work-card-body {
+  padding: 10px 12px 12px;
+}
+
+.carousel .work-card-title {
+  font-size: 14px;
+}
+
+.carousel .work-card-summary {
+  font-size: 12.5px;
+}
+
+/* Plain arrows (no circle) */
+.carousel-arrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 56px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--button);
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-arrow svg {
+  width: 40px;
+  height: 40px;
+  stroke-width: 2.2;
+}
+
+.carousel-arrow:hover {
+  color: var(--button-hover);
+}
+
+.carousel-arrow-left:hover {
+  transform: translateX(-3px);
+}
+
+.carousel-arrow-right:hover {
+  transform: translateX(3px);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--line);
+  transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.carousel-dot.is-active {
+  width: 20px;
+  background: var(--button);
+}
+
+@media (max-width: 560px) {
+  .carousel-viewport {
+    gap: 6px;
+  }
+
+  .carousel-item {
+    flex-basis: 100%; /* 1 card at a time on phones */
+  }
+
+  .carousel-arrow {
+    width: 34px;
+  }
+
+  .carousel-arrow svg {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* ---------- Timeline ---------- */
+.timeline {
+  border-left: 2px solid var(--line);
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 15px;
+}
+
+.timeline li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -27px;
+  top: 7px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--line);
+  border: 2px solid var(--bg);
+}
+
+.timeline li.is-current::before {
+  background: var(--button);
+}
+
+.timeline-years {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---------- Chips ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  cursor: default;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Little pop when hovered */
+.chip:hover {
+  background: var(--button);
+  color: var(--button-text);
+  transform: translateY(-3px) rotate(-3deg);
+}
+
+/* ---------- Social ---------- */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+  gap: 12px;
+}
+
+.social-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--accent);
+  transition: border-color 0.2s ease;
+}
+
+.social-card:hover {
+  text-decoration: none;
+  border-color: var(--button);
+}
+
+.social-card > span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+.social-platform {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.social-handle {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Breadcrumbs ---------- */
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumbs a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-sep {
+  margin: 0 2px;
+}
+
+/* ---------- Project page ---------- */
+.year-badge {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 12px;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.work-description {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.work-meta {
+  margin: 18px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.work-meta > div {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.work-meta dt {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--button);
+  color: var(--button-text);
+}
+
+.work-meta dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.work-meta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- Gallery ---------- */
+.gallery {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr));
+  gap: 12px;
+}
+
+.gallery-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card);
+  cursor: zoom-in;
+}
+
+.gallery-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-zoom {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: rgba(20, 20, 19, 0.6);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gallery-item:hover .gallery-zoom,
+.gallery-item:focus-visible .gallery-zoom {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .gallery-zoom {
+    opacity: 1;
+  }
+}
+
+/* ---------- Lightbox (enlarge viewer) ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(20, 20, 19, 0.92);
+  display: flex;
+  flex-direction: column;
+  padding: calc(12px + env(safe-area-inset-top, 0px)) 12px calc(12px + env(safe-area-inset-bottom, 0px));
+  animation: fade-in 0.2s ease;
+}
+
+.lightbox-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto 10px;
+}
+
+.lightbox-stage {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.lightbox-image {
+  width: 100%;
+  max-width: 1000px;
+  height: auto;
+  border-radius: 8px;
+  margin: auto 0;
+  animation: fade-in 0.2s ease;
+}
+
+.lightbox-nav {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.lightbox-button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  cursor: pointer;
+}
+
+.lightbox-button:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 24px 20px calc(28px + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------- 404 ---------- */
+.not-found {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.not-found p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+.not-found .hero-buttons {
+  justify-content: center;
+}
+
+/* ---------- Reduced motion ----------
+   Visitors who turn off animations on their device get a calm page. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .caret {
+    display: none;
+  }
+}
