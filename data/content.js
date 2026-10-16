@@ -35,7 +35,7 @@ export const navbar = {
    statuses: [
     { from: 0, to: 7, icon: "moon", text: "Probably asleep (hopefully)" },
     { from: 7, to: 8, icon: "sun", text: "Looking for coffee (she needs it...)" },
-    { from: 8, to: 9, icon: "sun", text: "Eating breakfast (I think)" },
+    { from: 8, to: 9, icon: "sun", text: "Still feeling sleepy" },
     { from: 9, to: 12, icon: "sun", text: "Learning and working on stuff" },
     { from: 12, to: 13, icon: "sun", text: "Eating somewhere (again)" },
     { from: 13, to: 15, icon: "sun", text: "Curiosity hits her again" },
