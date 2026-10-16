@@ -123,8 +123,6 @@ export const timeline = [
 export const interests = [
   "Art",
   "Music",
-  "Drawing",
-  "Guitar",
   "Photography",
   "Visual graphics",
   "Animation",
